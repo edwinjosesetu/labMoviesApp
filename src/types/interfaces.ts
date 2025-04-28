@@ -30,7 +30,7 @@ export interface MovieDetailsProps extends BaseMovieProps {
   production_countries: {
     iso_3166_1: string;
     name: string;
-  }[];  
+  }[];
 }
 
 export interface MovieImage {
@@ -53,4 +53,8 @@ export type FilterOption = "title" | "genre";
 export interface BaseMovieListProps {
   movies: BaseMovieProps[];
   selectFavourite: (movieId: number) => void;  //add this
+}
+
+export interface MovieListPageTemplateProps extends BaseMovieListProps {
+  title: string;
 }
