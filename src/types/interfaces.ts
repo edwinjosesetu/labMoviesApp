@@ -68,3 +68,17 @@ export interface Review{
 export interface ListedMovie extends BaseMovieProps {
   genre_ids: number[]; 
 }
+
+export interface GenreData {
+  genres: {
+    id: string;
+    name: string
+  }[];
+}
+
+export interface DiscoverMovies {
+  page: number;	
+  total_pages: number;
+  total_results: number;
+  results: BaseMovieProps[];
+}
