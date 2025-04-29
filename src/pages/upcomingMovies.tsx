@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { getUpcomingMovies } from "../api/tmdb-api";
-import { ListedMovie } from "../types/interfaces";
+import { BaseMovieProps, ListedMovie } from "../types/interfaces";
 
 const UpcomingMoviesPage: React.FC = () => {
   const [movies, setMovies] = useState<ListedMovie[]>([]);
@@ -23,6 +23,8 @@ const UpcomingMoviesPage: React.FC = () => {
     <PageTemplate
           title="Upcoming Movies"
           movies={movies} selectFavourite={function (): void {
+              throw new Error("Function not implemented.");
+          } } action={function (m: BaseMovieProps): React.ReactNode {
               throw new Error("Function not implemented.");
           } }    />
   );

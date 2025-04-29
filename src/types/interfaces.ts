@@ -17,8 +17,10 @@ export interface BaseMovieProps {
   favourite?: boolean;
   genre_ids?: number[];
 }
+
 export interface BaseMovieListProps {
   movies: BaseMovieProps[];
+  action: (m: BaseMovieProps) => React.ReactNode;
 }
 
 export interface MovieDetailsProps extends BaseMovieProps {
