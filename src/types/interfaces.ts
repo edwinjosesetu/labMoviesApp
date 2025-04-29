@@ -64,3 +64,7 @@ export interface Review{
   content: string
   author: string
 }
+
+export interface ListedMovie extends BaseMovieProps {
+  genre_ids: number[]; 
+}
