@@ -1,33 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { getUpcomingMovies } from "../api/tmdb-api";
-import { BaseMovieProps, ListedMovie } from "../types/interfaces";
+import { BaseMovieProps } from "../types/interfaces";
 import PlayListAddIcon from "../components/cardIcons/playlistAdd";
+import { useQuery } from "react-query";
+import Spinner from "../components/spinner";
 
 const UpcomingMoviesPage: React.FC = () => {
-  const [movies, setMovies] = useState<ListedMovie[]>([]);
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["upcomingMovies"],
+    queryFn: getUpcomingMovies,
+  });
 
-  useEffect(() => {
-    const fetchUpcomingMovies = async () => {
-      try {
-        const upcomingMovies = await getUpcomingMovies();
-        setMovies(upcomingMovies);
-      } catch (error) {
-        console.error("Error fetching upcoming movies:", error);
-      }
-    };
+  if (isLoading) {
+    return <Spinner />;
+  }
 
-    fetchUpcomingMovies();
-  }, []);
+  if (isError) {
+    return <h1>{error.message}</h1>;
+  }
 
   return (
     <PageTemplate
       title="Upcoming Movies"
-      movies={movies} selectFavourite={function (): void {
+      movies={data ? data : []}
+      selectFavourite={function (): void {
         throw new Error("Function not implemented.");
-      }}action={(movie: BaseMovieProps) => {
+      }}
+      action={(movie: BaseMovieProps) => {
         return <PlayListAddIcon {...movie} />;
-      }}/>
+      }}
+    />
   );
 };
 
