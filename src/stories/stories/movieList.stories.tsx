@@ -30,8 +30,9 @@ export const Basic = () => {
     <Grid container spacing={5}>
       <MovieList
         movies={movies}
-        action={(movie) => <AddToFavouritesIcon {...movie} />}
-      />
+        action={(movie) => <AddToFavouritesIcon {...movie} />} selectFavourite={function (movieId: number): void {
+          throw new Error('Function not implemented.');
+        } }      />
     </Grid>
   );
 };

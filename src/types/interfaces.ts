@@ -52,10 +52,10 @@ export interface MoviePageProps {
 
 export type FilterOption = "title" | "genre";
 
-// export interface BaseMovieListProps {
-//   movies: BaseMovieProps[];
-//   selectFavourite: (movieId: number) => void;  //add this
-// }
+export interface BaseMovieListProps {
+  movies: BaseMovieProps[];
+  selectFavourite: (movieId: number) => void;  //add this
+}
 
 export interface MovieListPageTemplateProps extends BaseMovieListProps {
   title: string;
