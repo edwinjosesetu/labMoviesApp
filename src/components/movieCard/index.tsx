@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -7,15 +7,15 @@ import CardHeader from "@mui/material/CardHeader";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import MustWatchIcon from "@mui/icons-material/PlaylistAdd";
 import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import Grid from "@mui/material/Grid";
-import img from '../../images/film-poster-placeholder.png';
+import img from "../../images/film-poster-placeholder.png";
 import { BaseMovieProps } from "../../types/interfaces";
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import { MoviesContext } from "../../contexts/moviesContext";
-
 
 const styles = {
   card: { maxWidth: 345 },
@@ -30,28 +30,34 @@ interface MovieCardProps {
   action: (m: BaseMovieProps) => React.ReactNode;
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({movie, action}) => {
-  const { favourites, addToFavourites } = useContext(MoviesContext);//NEW
+const MovieCard: React.FC<MovieCardProps> = ({ movie, action }) => {
+  const { favourites, mustWatchList } = useContext(MoviesContext); //NEW
 
-const isFavourite = favourites.find((id) => id === movie.id)? true : false;//NEW
- 
+  const isFavourite = favourites.find((id) => id === movie.id)? true : false;//NEW
+  const isMustWatch = mustWatchList.find((m) => m.id === movie.id)
+    ? true
+    : false;
 
   return (
     <Card sx={styles.card}>
-    <CardHeader
-      avatar={
-        isFavourite ? (   //CHANGED
-          <Avatar sx={styles.avatar}>
-            <FavoriteIcon />
-          </Avatar>
-        ) : null
-      }
-      title={
-        <Typography variant="h5" component="p">
-          {movie.title}{" "}
-        </Typography>
-      }
-    />
+      <CardHeader
+        avatar={
+          isFavourite ? ( //CHANGED
+            <Avatar sx={styles.avatar}>
+              <FavoriteIcon />
+            </Avatar>
+          ) : isMustWatch ? (
+            <Avatar sx={styles.avatar}>
+              <MustWatchIcon />
+            </Avatar>
+          ) : null
+        }
+        title={
+          <Typography variant="h5" component="p">
+            {movie.title}{" "}
+          </Typography>
+        }
+      />
       <CardMedia
         sx={styles.media}
         image={
@@ -77,7 +83,7 @@ const isFavourite = favourites.find((id) => id === movie.id)? true : false;//NEW
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
-      {action(movie)}
+        {action(movie)}
         <Link to={`/movies/${movie.id}`}>
           <Button variant="outlined" size="medium" color="primary">
             More Info ...
@@ -86,6 +92,6 @@ const isFavourite = favourites.find((id) => id === movie.id)? true : false;//NEW
       </CardActions>
     </Card>
   );
-}
+};
 
 export default MovieCard;
