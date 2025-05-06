@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { getUpcomingMovies } from "../api/tmdb-api";
 import { BaseMovieProps, ListedMovie } from "../types/interfaces";
-import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
+import PlayListAddIcon from "../components/cardIcons/playlistAdd";
 
 const UpcomingMoviesPage: React.FC = () => {
   const [movies, setMovies] = useState<ListedMovie[]>([]);
@@ -26,7 +26,7 @@ const UpcomingMoviesPage: React.FC = () => {
       movies={movies} selectFavourite={function (): void {
         throw new Error("Function not implemented.");
       }}action={(movie: BaseMovieProps) => {
-        return <AddToFavouritesIcon {...movie} />;
+        return <PlayListAddIcon {...movie} />;
       }}/>
   );
 };
