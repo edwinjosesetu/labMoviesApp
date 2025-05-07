@@ -17,9 +17,9 @@ const UpcomingMoviesPage: React.FC = () => {
   }
 
   if (isError) {
-    return <h1>{error.message}</h1>;
+    return <h1>{(error as Error).message}</h1>;
   }
-
+  
   return (
     <PageTemplate
       title="Upcoming Movies"
