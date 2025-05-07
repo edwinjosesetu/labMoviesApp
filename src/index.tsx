@@ -14,6 +14,7 @@ import AddMovieReviewPage from './pages/addMovieReviewPage';
 import PopularMoviesPage from "./pages/popularMoviesPage";
 import TVSeriesPage from "./pages/tvSeries";
 import ActorsPage from "./pages/actorsPage";
+import ActorDetailsPage from "./pages/actorsDetailsPage";
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/movies/popular" element={<PopularMoviesPage />} />
         <Route path="/movies/tv" element={<TVSeriesPage />} />
         <Route path="/actors" element={<ActorsPage />} />
+        <Route path="/actors/:id" element={<ActorDetailsPage />} />
       </Routes>
       </MoviesContextProvider>
     </BrowserRouter>
