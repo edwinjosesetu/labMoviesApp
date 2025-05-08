@@ -98,3 +98,13 @@ export interface TVSeriesProps extends BaseMovieProps {
   first_air_date?: string;
   vote_average?: number;
 }
+
+export interface SignInFormData {
+  username: string;
+  password: string;
+}
+
+export interface SignInResults {
+  message: string;
+  token: string;
+}

@@ -16,11 +16,14 @@ import TVSeriesPage from "./pages/tvSeries";
 import ActorsPage from "./pages/actorsPage";
 import ActorDetailsPage from "./pages/actorsDetailsPage";
 import TVSeriesDetailsPage from "./pages/TVSeriesDeatils";
+import SignInPage from "./pages/signInPage";
+import { UserProvider } from "./contexts/signinContext";
 
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
+      <UserProvider>
           <SiteHeader />      {/* New Header  */}
           <MoviesContextProvider>
           <Routes>
@@ -36,8 +39,10 @@ const App = () => {
         <Route path="/actors" element={<ActorsPage />} />
         <Route path="/actors/:id" element={<ActorDetailsPage />} />
         <Route path="/tv/:id" element={<TVSeriesDetailsPage />} />
+        <Route path="/signin" element={<SignInPage/>} />
       </Routes>
       </MoviesContextProvider>
+      </UserProvider>
     </BrowserRouter>
     <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
