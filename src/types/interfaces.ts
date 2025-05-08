@@ -7,7 +7,7 @@ export interface BaseMovieProps {
   original_language: string;
   overview: string;
   release_date: string;
-  vote_average: number;
+  vote_average?: number;
   popularity: number;
   poster_path?: string;
   tagline: string;
@@ -91,4 +91,10 @@ export interface Review {
   agree: boolean,
   rating: number,
   movieId: number,
+}
+
+export interface TVSeriesProps extends BaseMovieProps {
+  name: string;
+  first_air_date?: string;
+  vote_average?: number;
 }

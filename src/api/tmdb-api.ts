@@ -95,6 +95,16 @@ export const getMovie = (id: string) => {
       });
   };
 
+  export const getTVSeriesDetails = async (id: number) => {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/tv/${id}?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US`
+    );
+    if (!response.ok) {
+      throw new Error(`Failed to fetch TV series details: ${response.statusText}`);
+    }
+    return await response.json();
+  };  
+
   export const getActors = () => {
     return fetch(
       `https://api.themoviedb.org/3/person/popular?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`
