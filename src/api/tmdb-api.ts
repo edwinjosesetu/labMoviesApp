@@ -37,6 +37,17 @@ export const getMovie = (id: string) => {
       throw error
    });
   };
+
+  export const getLanguages = async (): Promise<{ iso_639_1: string; english_name: string }[]> => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/configuration/languages?api_key=${import.meta.env.VITE_TMDB_KEY}`
+  );
+  if (!response.ok) {
+    throw new Error('Failed to fetch languages');
+  }
+  return response.json();
+};
+
   
   export const getMovieImages = (id: string | number) => {
     return fetch(

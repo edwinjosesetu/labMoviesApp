@@ -50,7 +50,8 @@ export interface MoviePageProps {
   images: MovieImage[];
 }
 
-export type FilterOption = "title" | "genre";
+export type FilterOption = "title" | "genre" | "language";
+
 
 export interface BaseMovieListProps {
   movies: BaseMovieProps[];

@@ -5,6 +5,7 @@ import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, {
   titleFilter,
   genreFilter,
+  languageFilter,
 } from "../components/movieFilterUI";
 import { BaseMovieProps, DiscoverMovies } from "../types/interfaces";
 import { useQuery } from "react-query";
@@ -22,12 +23,19 @@ const genreFiltering = {
   value: "0",
   condition: genreFilter,
 };
+const languageFiltering = {
+  name: "language",
+  value: "0",
+  condition: languageFilter,
+};
 
 const HomePage: React.FC = () => {
   const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>("discover", getMovies);
-  const { filterValues, setFilterValues, filterFunction } = useFiltering(
-    [titleFiltering, genreFiltering]
-  );
+  const { filterValues, setFilterValues, filterFunction } = useFiltering([
+    titleFiltering,
+    genreFiltering,
+    languageFiltering,
+  ]);
 
   if (isLoading) {
     return <Spinner />;
@@ -40,12 +48,12 @@ const HomePage: React.FC = () => {
 
   const changeFilterValues = (type: string, value: string) => {
     const changedFilter = { name: type, value: value };
-    const updatedFilterSet =
-      type === "title"
-        ? [changedFilter, filterValues[1]]
-        : [filterValues[0], changedFilter];
+    const updatedFilterSet = filterValues.map((filter) =>
+      filter.name === type ? changedFilter : filter
+    );
     setFilterValues(updatedFilterSet);
   };
+
 
   const movies = data ? data.results : [];
   const displayedMovies = filterFunction(movies);
@@ -58,14 +66,16 @@ const HomePage: React.FC = () => {
         movies={displayedMovies}
         action={(movie: BaseMovieProps) => {
           return <AddToFavouritesIcon {...movie} />;
-        } } selectFavourite={function (movieId: number): void {
+        }} selectFavourite={function (movieId: number): void {
           throw new Error("Function not implemented.");
-        } }      />
+        }} />
       <MovieFilterUI
         onFilterValuesChange={changeFilterValues}
-        titleFilter={filterValues[0].value}
-        genreFilter={filterValues[1].value}
+        titleFilter={filterValues.find((f) => f.name === "title")?.value || ""}
+        genreFilter={filterValues.find((f) => f.name === "genre")?.value || "0"}
+        languageFilter={filterValues.find((f) => f.name === "language")?.value || "0"}
       />
+
     </>
   );
 };
