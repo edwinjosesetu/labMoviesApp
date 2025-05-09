@@ -15,7 +15,8 @@ const UpcomingMoviesPage: React.FC = () => {
 
   const [filter, setFilter] = useState({
     title: "",
-    genre: "0", 
+    genre: "0",
+    language: "0",
   });
 
   if (isLoading) {
@@ -29,13 +30,18 @@ const UpcomingMoviesPage: React.FC = () => {
   // Filter the movies based on the filter state
   const filteredMovies = data
     ? data.filter((movie: BaseMovieProps) => {
-        const matchesTitle = movie.title
-          .toLowerCase()
-          .includes(filter.title.toLowerCase());
-        const matchesGenre =
-          filter.genre === "0" || movie.genre_ids?.includes(Number(filter.genre));
-        return matchesTitle && matchesGenre;
-      })
+      const matchesTitle = movie.title
+        .toLowerCase()
+        .includes(filter.title.toLowerCase());
+
+      const matchesGenre =
+        filter.genre === "0" || movie.genre_ids?.includes(Number(filter.genre));
+
+      const matchesLanguage =
+        filter.language === "0" || movie.original_language === filter.language;
+
+      return matchesTitle && matchesGenre && matchesLanguage;
+    })
     : [];
 
   return (
@@ -47,10 +53,11 @@ const UpcomingMoviesPage: React.FC = () => {
         }
         titleFilter={filter.title}
         genreFilter={filter.genre}
+        languageFilter={filter.language}
       />
       <PageTemplate
         title="Upcoming Movies"
-        movies={filteredMovies} // Pass the filtered movies
+        movies={filteredMovies}
         selectFavourite={function (): void {
           throw new Error("Function not implemented.");
         }}
