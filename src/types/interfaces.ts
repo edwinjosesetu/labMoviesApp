@@ -115,3 +115,20 @@ export interface PaginationProps {
   totalPages?: number;
   onPageChange?: (event: React.ChangeEvent<unknown>, page: number) => void;
 }
+
+export interface FantasyMovieCast {
+  roleName: string;
+  description: string;
+}
+
+export interface FantasyMovieProps {
+  id: number;
+  title: string;
+  overview: string;
+  genres: string[];
+  releaseDate: string;
+  runtime: number;
+  productionCompanies: string[];
+  poster: string;
+  cast: FantasyMovieCast[];
+}

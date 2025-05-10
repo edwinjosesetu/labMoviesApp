@@ -20,6 +20,8 @@ import SignInPage from "./pages/signInPage";
 import { UserProvider } from "./contexts/signinContext";
 import FavoriteActors from "./pages/favouriteActors";
 import FavoriteTV from "./pages/favouriteTV";
+import FantasyMovie from "./pages/fantasyMovie";
+import FantasyMovieList from "./pages/fantasyMoviesList";
 
 const App = () => {
   return (
@@ -46,6 +48,8 @@ const App = () => {
               <Route path="/actors" element={<ActorsPage />} />
               <Route path="/actors/favourites" element={<FavoriteActors />} />
               <Route path="/tv/favourites" element={<FavoriteTV />} />
+              <Route path="/fantasy/create" element={<FantasyMovie />} />
+              <Route path="/fantasymovies" element={<FantasyMovieList />} />
             </Routes>
           </MoviesContextProvider>
         </UserProvider>

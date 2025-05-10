@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import {
   BaseMovieProps,
+  FantasyMovieProps,
   Review,
   TVSeriesProps,
 } from "../types/interfaces";
@@ -23,6 +24,9 @@ interface MovieContextInterface {
   favoriteTV: TVSeriesProps[];
   addFavoriteTV: (tv: TVSeriesProps) => void;
   removeFavoriteTV: (tv: TVSeriesProps) => void;
+
+  fantasyMovies: FantasyMovieProps[];
+  addFantasyMovie: (movie: FantasyMovieProps) => void;
 }
 
 const initialContextState: MovieContextInterface = {
@@ -39,6 +43,8 @@ const initialContextState: MovieContextInterface = {
   favoriteTV: [],
   addFavoriteTV: () => {},
   removeFavoriteTV: () => {},
+  fantasyMovies: [],
+  addFantasyMovie: () => {},
 };
 
 export const MoviesContext =
@@ -52,6 +58,7 @@ const MoviesContextProvider: React.FC<React.PropsWithChildren> = ({
   const [myReviews, setMyReviews] = useState<{ [movieId: number]: Review }>({});
   const [favoriteActor, setFavoriteActor] = useState<Actor[]>([]);
   const [favoriteTV, setFavoriteTV] = useState<TVSeriesProps[]>([]);
+  const [fantasyMovies, setFantasyMovies] = useState<FantasyMovieProps[]>([]);
 
   const addToFavourites = useCallback((movie: BaseMovieProps) => {
     setFavourites((prev) =>
@@ -97,6 +104,9 @@ const MoviesContextProvider: React.FC<React.PropsWithChildren> = ({
     setFavoriteTV((prev) => prev.filter((t) => t.id !== tv.id));
   }, []);
 
+  const addFantasyMovie = (movie: FantasyMovieProps) => {
+    setFantasyMovies((prev) => [...prev, { ...movie, id: Date.now() }]);
+  };
 
   return (
     <MoviesContext.Provider
@@ -114,6 +124,8 @@ const MoviesContextProvider: React.FC<React.PropsWithChildren> = ({
         favoriteTV,
         addFavoriteTV,
         removeFavoriteTV,
+        fantasyMovies,
+        addFantasyMovie,
       }}
     >
       {children}

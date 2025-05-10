@@ -130,6 +130,25 @@ const SiteHeader: React.FC = () => {
                     Favorites
                   </MenuItem>
                 </Menu>
+                <MenuItem onClick={(e) => setActorAnchorEl(e.currentTarget)}>
+                  Fantasy Movie
+                </MenuItem>
+                <Menu
+                  anchorEl={actorAnchorEl}
+                  open={openActor}
+                  onClose={() => setActorAnchorEl(null)}
+                  anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                  transformOrigin={{ vertical: "top", horizontal: "right" }}
+                >
+                  <MenuItem onClick={() => handleMenuSelect("/actors")}>
+                    Create
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => handleMenuSelect("/actors/favourites")}
+                  >
+                    List
+                  </MenuItem>
+                </Menu>
               </Menu>
             </>
           ) : (
@@ -182,6 +201,26 @@ const SiteHeader: React.FC = () => {
                   onClick={() => handleMenuSelect("/actors/favourites")}
                 >
                   Favorites
+                </MenuItem>
+              </Menu>
+
+              <Button
+                color="inherit"
+                endIcon={<ArrowDropDownIcon />}
+                onClick={(e) => setActorAnchorEl(e.currentTarget)}
+              >
+                Fantasy
+              </Button>
+              <Menu
+                anchorEl={actorAnchorEl}
+                open={openActor}
+                onClose={() => setActorAnchorEl(null)}
+              >
+                <MenuItem onClick={() => handleMenuSelect("/fantasy/create")}>
+                  Create
+                </MenuItem>
+                <MenuItem onClick={() => handleMenuSelect("/fantasymovies")}>
+                  List
                 </MenuItem>
               </Menu>
             </>
