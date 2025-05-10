@@ -1,5 +1,4 @@
-// src/components/tvSeriesCard/index.tsx
-import React from "react";
+import React, { useContext } from "react";
 import {
   Card,
   CardHeader,
@@ -13,12 +12,34 @@ import {
 import { Link } from "react-router-dom";
 import img from "../../images/film-poster-placeholder.png";
 import { TVSeriesProps } from "../../types/interfaces";
+import FavoriteTVIcon from "../cardIcons/FavoriteTVIcon";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { MoviesContext } from "../../contexts/moviesContext";
+
+const styles = {
+  avatar: {
+    backgroundColor: "rgb(255, 0, 0)",
+  },
+};
 
 const TVSeriesCard: React.FC<{ tvSeries: TVSeriesProps }> = ({ tvSeries }) => {
+  const { favoriteTV } = useContext(MoviesContext);
+
+  const isFavorite = favoriteTV.find((item) => item.id === tvSeries.id);
+
   return (
     <Card>
       <CardHeader
-        avatar={<Avatar>{tvSeries.name?.charAt(0)}</Avatar>}
+        avatar={
+          <>
+            {!!isFavorite && (
+              <Avatar style={styles.avatar}>
+                <FavoriteIcon />
+              </Avatar>
+            )}
+            <Avatar>{tvSeries.name?.charAt(0)}</Avatar>
+          </>
+        }
         title={tvSeries.name}
         subheader={`First Air Date: ${tvSeries.first_air_date ?? "N/A"}`}
       />
@@ -38,8 +59,11 @@ const TVSeriesCard: React.FC<{ tvSeries: TVSeriesProps }> = ({ tvSeries }) => {
       </CardContent>
       <CardActions>
         <Link to={`/tv/${tvSeries.id}`}>
-          <Button variant="outlined" size="small">More Info</Button>
+          <Button variant="outlined" size="small">
+            More Info
+          </Button>
         </Link>
+        <FavoriteTVIcon {...tvSeries} />
       </CardActions>
     </Card>
   );

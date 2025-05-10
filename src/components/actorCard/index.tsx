@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -10,8 +10,10 @@ import Avatar from "@mui/material/Avatar";
 import Grid from "@mui/material/Grid";
 import img from "../../images/film-poster-placeholder.png";
 import { Link } from "react-router-dom";
-
-interface Actor {
+import { MoviesContext } from "../../contexts/moviesContext";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteActorIcon from "../cardIcons/FavoriteActorIcon";
+export interface Actor {
   id: number;
   name: string;
   profile_path: string | null;
@@ -32,13 +34,22 @@ const styles = {
 };
 
 const ActorCard: React.FC<ActorCardProps> = ({ actor }) => {
+  const { favoriteActor } = useContext(MoviesContext);
+
+  const isFavorite = favoriteActor.find((item) => item.id === actor.id);
+
   return (
     <Card sx={styles.card}>
       <CardHeader
         avatar={
-          <Avatar sx={styles.avatar}>
-            {actor.name.charAt(0)}
-          </Avatar>
+          <>
+            {!!isFavorite && (
+              <Avatar style={styles.avatar}>
+                <FavoriteIcon />
+              </Avatar>
+            )}
+            <Avatar sx={styles.avatar}>{actor.name?.charAt(0)}</Avatar>
+          </>
         }
         title={
           <Typography variant="h6" component="p">
@@ -71,6 +82,7 @@ const ActorCard: React.FC<ActorCardProps> = ({ actor }) => {
             More Info ...
           </Button>
         </Link>
+        <FavoriteActorIcon {...actor} />
       </CardActions>
     </Card>
   );
