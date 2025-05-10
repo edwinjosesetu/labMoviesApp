@@ -109,3 +109,9 @@ export interface SignInResults {
   message: string;
   token: string;
 }
+
+export interface PaginationProps {
+  currentPage?: number;
+  totalPages?: number;
+  onPageChange?: (event: React.ChangeEvent<unknown>, page: number) => void;
+}

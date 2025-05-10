@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { getPopularMovies } from "../api/tmdb-api";
 import { BaseMovieProps } from "../types/interfaces";
@@ -7,10 +7,15 @@ import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 
 const PopularMoviesPage: React.FC = () => {
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["popularMovies"],
-    queryFn: getPopularMovies,
-  });
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const { data, isLoading, isError, error } = useQuery(
+    ["popularMovies", currentPage],
+    () => getPopularMovies(currentPage),
+    {
+      keepPreviousData: true,
+    }
+  );
 
   if (isLoading) {
     return <Spinner />;
@@ -22,8 +27,12 @@ const PopularMoviesPage: React.FC = () => {
 
   return (
     <PageTemplate
+      currentPage={currentPage}
+      onPageChange={(e, page: number) => setCurrentPage(page)}
+      totalPages={data?.total_pages || 1}
+      key={currentPage}
       title="Popular Movies"
-      movies={data ?? []}
+      movies={data.results ?? []}
       selectFavourite={() => {
         throw new Error("Function not implemented.");
       }}

@@ -8,10 +8,15 @@ import Spinner from "../components/spinner";
 import MovieFilterUI from "../components/movieFilterUI";
 
 const UpcomingMoviesPage: React.FC = () => {
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["upcomingMovies"],
-    queryFn: getUpcomingMovies,
-  });
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const { data, isLoading, isError, error } = useQuery(
+    ["upcomingMovies", currentPage],
+    () => getUpcomingMovies(currentPage),
+    {
+      keepPreviousData: true, // Important for smoother pagination
+    }
+  );
 
   const [filter, setFilter] = useState({
     title: "",
@@ -29,7 +34,7 @@ const UpcomingMoviesPage: React.FC = () => {
 
   // Filter the movies based on the filter state
   const filteredMovies = data
-    ? data.filter((movie: BaseMovieProps) => {
+    ? data?.results.filter((movie: BaseMovieProps) => {
       const matchesTitle = movie.title
         .toLowerCase()
         .includes(filter.title.toLowerCase());
@@ -56,6 +61,10 @@ const UpcomingMoviesPage: React.FC = () => {
         languageFilter={filter.language}
       />
       <PageTemplate
+        currentPage={currentPage}
+        key={currentPage}
+        onPageChange={(e, newPage: number) => setCurrentPage(newPage)}
+        totalPages={data?.total_pages || 1}
         title="Upcoming Movies"
         movies={filteredMovies}
         selectFavourite={function (): void {

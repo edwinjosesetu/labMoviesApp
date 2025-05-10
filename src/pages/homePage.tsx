@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { getMovies } from "../api/tmdb-api";
 import useFiltering from "../hooks/useFiltering";
@@ -30,7 +30,14 @@ const languageFiltering = {
 };
 
 const HomePage: React.FC = () => {
-  const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>("discover", getMovies);
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>(
+    ["discover", currentPage],
+    () => getMovies(currentPage),
+    {
+      keepPreviousData: true,
+    }
+  );
   const { filterValues, setFilterValues, filterFunction } = useFiltering([
     titleFiltering,
     genreFiltering,
@@ -54,6 +61,13 @@ const HomePage: React.FC = () => {
     setFilterValues(updatedFilterSet);
   };
 
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
+    setCurrentPage(page);
+  };
+
 
   const movies = data ? data.results : [];
   const displayedMovies = filterFunction(movies);
@@ -62,6 +76,9 @@ const HomePage: React.FC = () => {
   return (
     <>
       <PageTemplate
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+        totalPages={data?.total_pages as number}
         title="Discover Movies"
         movies={displayedMovies}
         action={(movie: BaseMovieProps) => {
