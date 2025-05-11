@@ -29,10 +29,12 @@ const SiteHeader: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [tvAnchorEl, setTvAnchorEl] = useState<null | HTMLElement>(null);
   const [actorAnchorEl, setActorAnchorEl] = useState<null | HTMLElement>(null);
+  const [fantasyAnchorEl, setFantasyAnchorEl] = useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);
   const openTv = Boolean(tvAnchorEl);
   const openActor = Boolean(actorAnchorEl);
+  const openFantasy = Boolean(fantasyAnchorEl);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
@@ -146,9 +148,9 @@ const SiteHeader: React.FC = () => {
                       Fantasy Movie
                     </MenuItem>
                     <Menu
-                      anchorEl={actorAnchorEl}
-                      open={openActor}
-                      onClose={() => setActorAnchorEl(null)}
+                      anchorEl={fantasyAnchorEl}
+                      open={openFantasy}
+                      onClose={() => setFantasyAnchorEl(null)}
                       anchorOrigin={{ vertical: "top", horizontal: "right" }}
                       transformOrigin={{ vertical: "top", horizontal: "right" }}
                     >
@@ -224,14 +226,14 @@ const SiteHeader: React.FC = () => {
                   <Button
                     color="inherit"
                     endIcon={<ArrowDropDownIcon />}
-                    onClick={(e) => setActorAnchorEl(e.currentTarget)}
+                    onClick={(e) => setFantasyAnchorEl(e.currentTarget)}
                   >
                     Fantasy
                   </Button>
                   <Menu
-                    anchorEl={actorAnchorEl}
-                    open={openActor}
-                    onClose={() => setActorAnchorEl(null)}
+                    anchorEl={fantasyAnchorEl}
+                    open={openFantasy}
+                    onClose={() => setFantasyAnchorEl(null)}
                   >
                     <MenuItem
                       onClick={() => handleMenuSelect("/fantasy/create")}
