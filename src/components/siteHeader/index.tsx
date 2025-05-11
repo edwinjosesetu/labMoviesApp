@@ -13,6 +13,7 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { useUser } from "../../contexts/signinContext";
+import { languageFilter } from "../movieFilterUI";
 
 const styles = {
   title: {
@@ -39,6 +40,7 @@ const SiteHeader: React.FC = () => {
   const menuOptions = [
     { label: "Home", path: "/" },
     { label: "Favorites", path: "/movies/favourites" },
+    { label: "Reviews", path: "/favouriteReview" },
     { label: "Upcoming", path: "/movies/upcoming" },
     { label: "Popular Movie", path: "/movies/popular" },
     { label: "Sign In", path: "/signin" },

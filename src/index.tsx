@@ -22,6 +22,7 @@ import FavoriteActors from "./pages/favouriteActors";
 import FavoriteTV from "./pages/favouriteTV";
 import FantasyMovie from "./pages/fantasyMovie";
 import FantasyMovieList from "./pages/fantasyMoviesList";
+import FrontendReviewsPage from "./pages/reviewDisplay";
 
 const App = () => {
   return (
@@ -50,6 +51,7 @@ const App = () => {
               <Route path="/tv/favourites" element={<FavoriteTV />} />
               <Route path="/fantasy/create" element={<FantasyMovie />} />
               <Route path="/fantasymovies" element={<FantasyMovieList />} />
+              <Route path="/favouriteReview" element={<FrontendReviewsPage />} />
             </Routes>
           </MoviesContextProvider>
         </UserProvider>
