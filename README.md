@@ -2,7 +2,7 @@
 
 __Name:__ Edwin Jose
 
-__Video demonstration:__ ..... [URL of YouTube video demonstration](https://youtu.be/your-video-url-here) ....
+__Video demonstration:__ ..... [URL of YouTube video demonstration](https://youtu.be/Xu-KngZjoSQ) ....
 
 This repository contains an implementation of the Movie Fans Web Application using the React. 
 
