@@ -1,30 +1,88 @@
-# React + TypeScript + Vite
+# Assignment 2 - React App 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+__Name:__ Edwin Jose
 
-Currently, two official plugins are available:
+__Video demonstration:__ ..... [URL of YouTube video demonstration](https://youtu.be/your-video-url-here) ....
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This repository contains an implementation of the Movie Fans Web Application using the React. 
 
-## Expanding the ESLint configuration
+### Features
+[ A bullet-point list of the __new features__ you added to the Movies app.]
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
++ Add pagination
++ Favourite TV series  
++ Favourite Actors
++ My fantasy movie - The user can create their fantasy movie record. Allow the addition of a cast, where each member has a role name and description. Adding/Uploading a movie poster  
++ Add Review for Favorite Movie
++ Add favorite and remove favorite button  
++ Add TV show detailed view section
++ Add Actors details view
++ Data Model - An additional data entity type: TV series and Server state Caching  
++ Popular movie page
++ Sign In with private and public routing.
++ Upcoming movies
++ Flitering movies with language.
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+### Setup requirements.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
++ Ensure you have Node.js and npm installed on your machine  
++ Navigate to the root directory of the cloned repository in your terminal  
++ Run `npm install` to install the necessary dependencies  
++ Create a `.env` file in the root directory and add your TMDB API key as `REACT_APP_TMDB_API_KEY=your_api_key_here`  
++ Run `npm start` to start the development server  
++ Open your web browser and navigate to http://localhost:3000 to view the app  
++ Make sure to replace `your_api_key_here` with your actual TMDB API key  
+
+### API Endpoints
+
++ Get list of favourite movies - `/movies/favourites`
++ Get movie details - `/movies/:id`
++ Get home page data (e.g. trending movies, featured sections) - `/`
++ Get specific movie review - `/reviews/:id`
++ Get upcoming movies - `/movies/upcoming`
++ Submit new movie review - `/reviews/form`
++ Get popular movies - `/movies/popular`
++ Get TV series list - `/tv`
++ Get actors list - `/actors`
++ Get actor details - `/actors/:id`
++ Get TV series details - `/tv/:id`
++ User authentication - `/signin`
++ Get favourite actors - `/actors/favourites`
++ Get favourite TV shows - `/tv/favourites`
++ Create fantasy movie - `/fantasy/create`
++ Get list of fantasy movies - `/fantasymovies`
++ Get reviews on favourites - `/favouriteReview`
+
+### Routing
+
++ Home Page = `/`
++ Redirect any unknown route to Home Page = `"*"`
++ Favourite Movies Page = `/movies/favourites`
++ Movie Details Page = `/movies/:id`
++ Upcoming Movies Page = `/movies/upcoming`
++ Popular Movies Page = `/movies/popular`
++ Add Movie Review Page = `/reviews/form`
++ Movie Review Page = `/reviews/:id`
++ TV Series Page = `/tv`
++ TV Series Details Page = `/tv/:id`
++ Favourite TV Shows Page = `/tv/favourites`
++ Actors Page = `/actors`
++ Actor Details Page = `/actors/:id`
++ Favourite Actors Page = `/actors/favourites`
++ Sign In Page = `/signin`
++ Create Fantasy Movie Page = `/fantasy/create`
++ Fantasy Movies List Page = `/fantasymovies`
++ Reviews for Favourite Movies Page = `/favouriteReview`
+
+
+### Assignment 1 integration
+
++ Front end deployment  
++ Frontend CDN deployment to AWS (CloudFront)  
+
+### Independent learning (If relevant)
+  
++ Uploading poster of the movie 
++ Allow the addition of a cast, where each member has a role name and description  
++
