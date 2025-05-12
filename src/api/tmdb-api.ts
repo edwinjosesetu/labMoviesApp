@@ -179,7 +179,7 @@ export const getActorDetails = async (id: number) => {
 export const addReviewFrontend = async (review: {}) => {
   try {
     console.log("Sending review to API:", review); // Debugging log
-    const response = await fetch("https://aec77clxv0.execute-api.eu-west-1.amazonaws.com/dev/frontendreviews", {
+    const response = await fetch("https://jhajt3qu5c.execute-api.eu-west-1.amazonaws.com/dev/frontendreviews", {
       method: "POST",
       mode: 'no-cors',
       headers: {
@@ -203,7 +203,7 @@ export const addReviewFrontend = async (review: {}) => {
 
 export const getFrontendReview = async () => {
   try {
-    const response = await fetch("https://aec77clxv0.execute-api.eu-west-1.amazonaws.com/dev/frontendreviews", {
+    const response = await fetch("https://jhajt3qu5c.execute-api.eu-west-1.amazonaws.com/dev/frontendreviews", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

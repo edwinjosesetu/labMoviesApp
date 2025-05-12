@@ -5,7 +5,7 @@ export const signIn = async (
 ): Promise<{ token: string }> => {
   try {
     const response = await fetch(
-      "https://gklvv4xam9.execute-api.eu-west-1.amazonaws.com/prod/auth/signin",
+      "https://nxdyxwvy19.execute-api.eu-west-1.amazonaws.com/prod/auth/signin",
       {
         method: "POST",
         headers: {
